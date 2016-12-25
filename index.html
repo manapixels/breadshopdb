@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en">
 <head>
 
   <!-- Basic Page Needs
@@ -26,48 +26,62 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
+    
 </head>
-<body>
+<body ng-app="myApp" ng-controller="AppController">
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-      <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Hi Admin</h4>
-        <p>Thi is the admin page to create new entries, edit or delete bread! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-      <input ng-model="test">{{test}}
-      <table class="u-full-width">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Sex</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Dave Gamache</td>
-              <td>26</td>
-              <td>Male</td>
-              <td>San Francisco</td>
-            </tr>
-            <tr>
-              <td>Dwayne Johnson</td>
-              <td>42</td>
-              <td>Male</td>
-              <td>Hayward</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="container" >
+        
+        <div class="row">
+            <div class="one-half column" style="margin-top: 25%">
+                <h4>Hi Admin</h4>
+                <p>Thi is the admin page to create new entries, edit or delete bread! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+            </div>
+        </div>
+        
+        <div class="row">       
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                    <th>Item Number</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price (NTD)</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td><input class="form-control" ng-model="bread.id"></td>
+                    <td><input class="form-control" ng-model="bread.name"></td>
+                    <td><input class="form-control" ng-model="bread.description"></td>
+                    <td><input class="form-control" ng-model="bread.price"></td>
+                    <td><button class="button button-primary" ng-click="addBread()">Add</button></td>
+                    <td><button class="button" ng-click="updateBread()">Update</button></td>
+                </tr>
+                    <tr ng-repeat="bread in breadlist">
+                    <td>{{bread.id}}</td>
+                    <td>{{bread.name}}</td>
+                    <td>{{bread.description}}</td>
+                    <td>{{bread.price}}</td>
+                    <td><button class="button button-delete" ng-click="deleteBread(bread._id)">Del</button></td>
+                    <td><button class="button" ng-click="editBread(bread._id)">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        
     </div>
-  </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- End Document
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="controller/controller.js"></script>
+
     
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 </body>
 </html>

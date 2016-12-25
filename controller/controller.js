@@ -1,21 +1,54 @@
-function AppCtrl() {
-    console.log("hello world from controller");
+var myApp = angular.module('myApp', []);
+
+myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
+
+    console.log("This is the controller");
     
-    bread1 = {
-        id: "000001",
-        name: "Velvety Choco Bread",
-        description: "Melting chocolate lava bread within!",
-        price: "100"
-    });
+    var refresh = function() {
+        $http.get('/breadlist')
+            .then(function successCallback(response) {
+                console.log("Received GET response");
+                $scope.breadlist = response.data;
+                delete $scope.bread;
+            });
+    };
     
-    bread2 = {
-        id: "000002",
-        name: "Velvety Red Bean Bread",
-        description: "Melting chocolate lava bread within!",
-        price: "100"
-    });
+    refresh();
     
+    $scope.addBread = function() {
+        console.log($scope.bread);
+        $http.post('/breadlist', $scope.bread)
+            .then(function successCallback(response) {
+                console.log(response);
+            refresh();
+            });
+    };
     
+    $scope.deleteBread = function(id) {
+        console.log(id);
+        $http.delete('/breadlist/' + id)
+            .then(function successCallback(response) {
+                console.log(response);
+            refresh();
+            });
+    };
     
+    $scope.editBread = function(id) {
+        console.log(id);
+        $http.get('/breadlist/' + id)
+            .then(function successCallback(response) {
+                $scope.bread = response.data;
+            });
+    };
     
-};
+    $scope.updateBread = function() {
+        console.log($scope.bread._id);
+        $http.put('/breadlist/' + $scope.bread._id, $scope.bread)
+            .then(function successCallback(response) {
+                console.log(response);
+                refresh();
+            });
+    };
+    
+}]);
+

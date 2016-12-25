@@ -172,6 +172,7 @@ input[type="reset"],
 input[type="button"] {
   display: inline-block;
   height: 38px;
+    width: 100%;
   padding: 0 30px;
   color: #555;
   text-align: center;
@@ -186,7 +187,8 @@ input[type="button"] {
   border-radius: 4px;
   border: 1px solid #bbb;
   cursor: pointer;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 .button:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -221,6 +223,28 @@ input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #1EAEDB;
   border-color: #1EAEDB; }
+
+.button.button-delete,
+button.button-delete,
+input[type="submit"].button-delete,
+input[type="reset"].button-delete,
+input[type="button"].button-delete {
+  color: #FFF;
+  background-color: #f03365;
+  border-color: #f03365; }
+.button.button-delete:hover,
+button.button-delete:hover,
+input[type="submit"].button-delete:hover,
+input[type="reset"].button-delete:hover,
+input[type="button"].button-delete:hover,
+.button.button-delete:focus,
+button.button-delete:focus,
+input[type="submit"].button-delete:focus,
+input[type="reset"].button-delete:focus,
+input[type="button"].button-delete:focus {
+  color: #FFF;
+  background-color: #d74c71;
+  border-color: #d74c71; }
 
 
 /* Forms
