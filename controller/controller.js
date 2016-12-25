@@ -50,5 +50,9 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
             });
     };
     
+    $scope.clearInputs = function() {
+        delete $scope.bread;
+    };
+    
 }]);
 
