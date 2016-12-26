@@ -36,6 +36,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $http.post('/breadlist', $scope.bread)
             .then(function successCallback(response) {
                 console.log(response);
+                $scope.exitAddUpdateMode();
             refresh();
             });
     };
@@ -45,6 +46,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $http.delete('/breadlist/' + id)
             .then(function successCallback(response) {
                 console.log(response);
+                $scope.exitAddUpdateMode();
             refresh();
             });
     };
@@ -54,6 +56,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $http.get('/breadlist/' + id)
             .then(function successCallback(response) {
                 $scope.bread = response.data;
+                $scope.enterUpdateMode();
             });
     };
 
@@ -62,6 +65,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $http.put('/breadlist/' + $scope.bread._id, $scope.bread)
             .then(function successCallback(response) {
                 console.log(response);
+                $scope.exitAddUpdateMode();
                 refresh();
             });
     };
@@ -91,6 +95,53 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
     $scope.clearInputs = function() {
         delete $scope.bread;
     };
+
+    $scope.sortBy = function(propertyName) {
+        $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+    };
+
+    $scope.enterAddMode = function(){
+        var bar = document.getElementById("inputBar");
+        var addButton = document.getElementById("addButton");
+        var updateButton = document.getElementById("updateButton");
+        var deleteButton = document.getElementById("deleteButton");
+        var clearButton = document.getElementById("clearButton");
+        bar.style.display = 'block';
+        addButton.style.display = 'block';
+        updateButton.style.display = 'none';
+        deleteButton.style.display = 'none';
+        clearButton.style.display = 'none';
+    };
+
+    $scope.enterUpdateMode = function(){
+        var bar = document.getElementById("inputBar");
+        var addButton = document.getElementById("addButton");
+        var updateButton = document.getElementById("updateButton");
+        var deleteButton = document.getElementById("deleteButton");
+        var clearButton = document.getElementById("clearButton");
+        bar.style.display = 'block';
+        addButton.style.display = 'none';
+        updateButton.style.display = 'block';
+        deleteButton.style.display = 'block';
+        clearButton.style.display = 'block';
+    };
+
+    $scope.exitAddUpdateMode = function(){
+        var bar = document.getElementById("inputBar");
+        var addButton = document.getElementById("addButton");
+        var updateButton = document.getElementById("updateButton");
+        var deleteButton = document.getElementById("deleteButton");
+        var clearButton = document.getElementById("clearButton");
+        bar.style.display = 'none';
+        addButton.style.display = 'none';
+        updateButton.style.display = 'none';
+        deleteButton.style.display = 'none';
+        clearButton.style.display = 'none';
+
+        $scope.clearInputs();
+    };
+
     
 }]);
 
