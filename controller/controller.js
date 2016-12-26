@@ -18,7 +18,7 @@ myApp.config(function($routeProvider) {
 myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
 
     console.log("This is the controller");
-    
+
     var refresh = function() {
         $http.get('/breadlist')
             .then(function successCallback(response) {
@@ -27,18 +27,19 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
                 delete $scope.bread;
             });
     };
-    
+
     refresh();
-    
+
     $scope.addBread = function() {
         console.log($scope.bread);
+        $scope.bread.stock = parseInt($scope.bread.stock);
         $http.post('/breadlist', $scope.bread)
             .then(function successCallback(response) {
                 console.log(response);
             refresh();
             });
     };
-    
+
     $scope.deleteBread = function(id) {
         console.log(id);
         $http.delete('/breadlist/' + id)
@@ -47,7 +48,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
             refresh();
             });
     };
-    
+
     $scope.editBread = function(id) {
         console.log(id);
         $http.get('/breadlist/' + id)
@@ -55,7 +56,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
                 $scope.bread = response.data;
             });
     };
-    
+
     $scope.updateBread = function() {
         console.log($scope.bread._id);
         $http.put('/breadlist/' + $scope.bread._id, $scope.bread)
@@ -63,6 +64,28 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
                 console.log(response);
                 refresh();
             });
+    };
+
+    $scope.plusBread = function(id) {
+        console.log(id);
+        $http.get('/breadlist/' + id)
+            .then(function successCallback(response) {
+                $scope.bread = response.data;
+                $scope.bread.stock  = parseInt($scope.bread.stock) + 1;
+                $scope.updateBread(id);
+            });
+
+    };
+
+    $scope.minusBread = function(id) {
+        console.log(id);
+        $http.get('/breadlist/' + id)
+            .then(function successCallback(response) {
+                $scope.bread = response.data;
+                $scope.bread.stock  = parseInt($scope.bread.stock) - 1;
+                $scope.updateBread(id);
+            });
+
     };
     
     $scope.clearInputs = function() {

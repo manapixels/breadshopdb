@@ -58,11 +58,13 @@ app.put('/breadlist/:id', function(req, res) {
     var id = req.params.id;
     console.log(req.body.name);
     db.breadlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
-                                update: {$set: {id: req.body.id, name: req.body.name, description: req.body.description, price: req.body.price}},
+                                update: {$set: {id: req.body.id, name: req.body.name, description: req.body.description, price: req.body.price, stock: req.body.stock}},
                                 new: true}, function (err, docs) {
         res.json(docs);
     });
 });
+
+
 
 app.listen(3000);
 console.log("Server running");
