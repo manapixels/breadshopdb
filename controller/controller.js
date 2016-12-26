@@ -6,8 +6,8 @@ myApp.config(function($routeProvider) {
             templateUrl: 'views/admin.html',
             controller: 'AppController'
         })
-        .when('/customerView', {
-            templateUrl: 'views/customer.html',
+        .when('/gridView', {
+            templateUrl: 'views/grid.html',
             controller: 'AppController'
         })
         .otherwise ({

@@ -24,6 +24,20 @@ app.post('/breadlist', function(req, res) {
     });
 });
 
+app.post('/breadlist/:id', 'plus', function(req, res) {
+    console.log(req.body);
+    db.breadlist.edit(req.body, function(err, docs) {
+        res.json(docs);
+    });
+});
+
+app.post('/breadlist/:id', 'minus', function(req, res) {
+    console.log(req.body);
+    db.breadlist.edit(req.body, function(err, docs) {
+        res.json(docs);
+    });
+});
+
 app.delete('/breadlist/:id', function(req, res) {
     var id = req.params.id;
     console.log(id);
