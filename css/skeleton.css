@@ -411,17 +411,34 @@ hr {
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 1);
+    opacity: 0;
+    -webkit-transform: translateY(50%);
+	-moz-transform: translateY50%);
+	-o-transform: translateY(50%);
+	-ms-transform: translateY(50%);
+	transform: translateY(50%);
+    transform: translateY(50%);
+    -webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+.inputbar.show {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+	-moz-transform: translateY(0%);
+	-o-transform: translateY(0%);
+	-ms-transform: translateY(0%);
+	transform: translateY(0%);
+    transform: translateY(0%);
 }
 
 input {
     border: 1px solid #333;
     text-align: center; width: 200px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 .inputbar table {
     margin: 0;
@@ -432,7 +449,14 @@ input {
 .inputbar button {
     background-color: #FFF;
 }
-
+.addbreadbtn {
+    background-color: rgb(30, 174, 219);
+    color: #FFF;
+}
+.addbreadbtn:hover {
+    background-color: rgba(30, 174, 219, 0.8);
+    color: #FFF;
+}
 
 .flexbox {
     -ms-box-orient: horizontal;
@@ -475,8 +499,9 @@ input {
     color: #f03365;
 }
 .needspace {
-    padding-bottom: 10%;
+    padding-bottom: 5%;
 }
+    
 
 
 /* Clearing
@@ -515,3 +540,4 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
