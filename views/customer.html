@@ -1,0 +1,41 @@
+<div class="container" >
+        
+    <a href="#!/adminView" class="button">Go to admin</a>
+    
+    <div class="row">       
+        <table class="u-full-width">
+          <thead>
+            <tr>
+                <th>Item Number</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price (NTD)</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td><input class="form-control" ng-model="bread.id"></td>
+                <td><input class="form-control" ng-model="bread.name"></td>
+                <td><input class="form-control" ng-model="bread.description"></td>
+                <td><input class="form-control" ng-model="bread.price"></td>
+                <td><button class="button button-primary" ng-click="addBread()">Add</button></td>
+                <td><button class="button" ng-click="updateBread()">Update</button></td>
+                <td><button class="button" ng-click="clearInputs()">Clear</button></td>
+
+            </tr>
+                <tr ng-repeat="bread in breadlist">
+                <td>{{bread.id}}</td>
+                <td>{{bread.name}}</td>
+                <td>{{bread.description}}</td>
+                <td>{{bread.price}}</td>
+                <td><button class="button button-delete" ng-click="deleteBread(bread._id)">Del</button></td>
+                <td><button class="button" ng-click="editBread(bread._id)">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+        
+</div>

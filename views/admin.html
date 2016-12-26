@@ -1,0 +1,63 @@
+<div class="container needspace" >
+    <div class="row">
+        <a href="#!/customerView" class="button">Go to shopping site</a>
+    </div>
+    <div class="row">
+        <div class="one-half column" style="margin-top: 5%">
+            <h4>Inventory Management</h4>
+            <p>This is the admin page to create new entries, edit or delete bread!</p>
+        </div>
+    </div>
+
+    <div class="row">       
+        <table class="u-full-width">
+          <thead>
+            <tr>
+                <th><a ng-click="sortBy('id')">Item #</a></th>
+                <th><a ng-click="sortBy('name')">Name</a></th>
+                <th><a ng-click="sortBy('description')">Description</a></th>
+                <th><a ng-click="sortBy('price')">Price (NTD)</a></th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr ng-repeat="bread in breadlist | orderBy:'id'">
+                <td>{{bread.id}}</td>
+                <td>{{bread.name}}</td>
+                <td>{{bread.description}}</td>
+                <td>{{bread.price}}</td>
+                <td><button class="button button-delete" ng-click="deleteBread(bread._id)">Del</button></td>
+                <td><button class="button" ng-click="editBread(bread._id)">Edit</button></td>
+            </tr>
+              
+              
+              
+          </tbody>
+        </table>
+        
+    </div>
+</div>
+    
+    
+<div class="inputbar">
+    <div class="container">
+    <table class="u-full-width">
+        <tbody>
+
+            <tr>
+                <td><input class="form-control" ng-model="bread.id" style="max-width: 50px;"></td>
+                <td><input class="form-control" ng-model="bread.name"></td>
+                <td><input class="form-control" ng-model="bread.description"></td>
+                <td><input class="form-control" ng-model="bread.price" style="max-width: 100px;"></td>
+                <td><button class="button button-primary" ng-click="addBread()">Add</button></td>
+                <td><button class="button" ng-click="updateBread()">Update</button></td>
+                <td class="table-col-clear"><button class="button" ng-click="clearInputs()">Clear</button></td>
+            </tr>
+
+        </tbody>
+    </table>
+    </div>
+</div>

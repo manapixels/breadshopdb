@@ -1,4 +1,19 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
+
+myApp.config(function($routeProvider) {
+    $routeProvider
+        .when('/adminView', {
+            templateUrl: 'views/admin.html',
+            controller: 'AppController'
+        })
+        .when('/customerView', {
+            templateUrl: 'views/customer.html',
+            controller: 'AppController'
+        })
+        .otherwise ({
+            redirectTo: '/adminView'
+        });
+});
 
 myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
 

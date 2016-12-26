@@ -350,13 +350,16 @@ th,
 td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #E1E1E1; }
+  border-bottom: 1px solid #FAFAFA; }
 th:first-child,
 td:first-child {
   padding-left: 0; }
 th:last-child,
 td:last-child {
   padding-right: 0; }
+th > a {
+    cursor: pointer;
+}
 
 
 /* Spacing
@@ -402,6 +405,39 @@ hr {
   margin-bottom: 3.5rem;
   border-width: 0;
   border-top: 1px solid #E1E1E1; }
+
+.inputbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+input {
+    border: 1px solid #333;
+    text-align: center; width: 200px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.inputbar table {
+    margin: 0;
+}
+.inputbar td {
+    border: none;
+}
+.inputbar button {
+    background-color: #FFF;
+}
+
+
+.needspace {
+    padding-bottom: 10%;
+}
 
 
 /* Clearing
