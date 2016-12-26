@@ -397,6 +397,22 @@ ol {
   float: left; }
 
 
+/* Animations
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+@keyframes fadein {
+    from    { opacity: 0; }
+    to      { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from    { opacity: 1; }
+    to      { opacity: 0; }
+}
+
+
+
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
@@ -501,6 +517,12 @@ input {
 .needspace {
     padding-bottom: 5%;
 }
+
+
+
+.ng-enter         { animation: fadein 0.4s 0.2s both ease-out; position: absolute; left: 0; right: 0; }
+.ng-leave         { animation: fadeout 0.2s 0.4s both ease-out; position: absolute; left: 0; right: 0; }
+
     
 
 
