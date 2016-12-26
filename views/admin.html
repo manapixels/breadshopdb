@@ -14,6 +14,7 @@
           <thead>
             <tr>
                 <th><a ng-click="sortBy('id')">Item #</a></th>
+                <th><i class="fa fa-picture-o" aria-hidden="true"></i></th>
                 <th><a ng-click="sortBy('name')">Name</a></th>
                 <th><a ng-click="sortBy('description')">Description</a></th>
                 <th><a ng-click="sortBy('price')">Price (NTD)</a></th>
@@ -27,16 +28,20 @@
             
             <tr ng-repeat="bread in breadlist | orderBy:'id'">
                 <td>{{bread.id}}</td>
+                <td>
+                    <form action="/api/upload" method="post" enctype="multipart/form-data" onchange="this.submit();">
+                        <input name="myFile" type="file" id="file" class="inputfile" />
+                        <label for="file"><i class="fa fa-upload" aria-hidden="true"></i></label>
+                    </form>
+                </td>
                 <td>{{bread.name}}</td>
                 <td>{{bread.description}}</td>
                 <td>{{bread.price}}</td>
                 <td>{{bread.stock}}</td>
-                <td><button class="button button-plus" ng-click="plusBread(bread._id)">+</button></td>
-                <td><button class="button button-minus" ng-click="minusBread(bread._id)">-</button></td>
+                <td><button class="button" ng-click="plusBread(bread._id)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                <td><button class="button" ng-click="minusBread(bread._id)"><i class="fa fa-minus" aria-hidden="true"></i></button></td>
                 <td><button class="button" ng-click="editBread(bread._id)">Edit</button></td>
             </tr>
-              
-              
               
           </tbody>
         </table>

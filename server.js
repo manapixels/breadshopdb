@@ -3,6 +3,8 @@ var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('breadlist', ['breadlist']);
 var bodyParser = require('body-parser');
+var multer      = require('multer');
+var upload      = multer({ dest: __dirname + '/uploads' });
 
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.json());
@@ -20,20 +22,6 @@ app.get('/breadlist', function(req, res) {
 app.post('/breadlist', function(req, res) {
     console.log(req.body);
     db.breadlist.insert(req.body, function(err, docs) {
-        res.json(docs);
-    });
-});
-
-app.post('/breadlist/:id', 'plus', function(req, res) {
-    console.log(req.body);
-    db.breadlist.edit(req.body, function(err, docs) {
-        res.json(docs);
-    });
-});
-
-app.post('/breadlist/:id', 'minus', function(req, res) {
-    console.log(req.body);
-    db.breadlist.edit(req.body, function(err, docs) {
         res.json(docs);
     });
 });
@@ -64,7 +52,23 @@ app.put('/breadlist/:id', function(req, res) {
     });
 });
 
+app.post('/api/upload', upload.single('myFile'), function(req, res) {
+     var widgetId       = req.body.widgetId;
+     var width          = req.body.width;
+     var myFile         = req.file;
 
+     var originalname   = myFile.originalname;
+     var filename       = myFile.filename;
+     var path           = myFile.path;
+     var destination    = myFile.destination;
+     var size           = myFile.size;
+     var mimetype       = myFile.mimetype;
+    
+    res.send(myFile);
+    
+    
+});
 
 app.listen(3000);
 console.log("Server running");
+    
