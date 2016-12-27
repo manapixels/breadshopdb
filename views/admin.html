@@ -1,4 +1,4 @@
-<div class="container needspace" ng-controller="AppController">
+<div class="container needspace">
     <div class="row">
         <a href="#!/gridView" class="button">Go to shopping site</a>
         <a ng-click="enterAddMode()" class="button addbreadbtn">Add Bread</a>
@@ -48,7 +48,7 @@
 </div>
     
     
-<div class="inputbar" id="inputBar">
+<div class="inputbar" id="inputbar">
     <div class="container">
     <table class="u-full-width">
         <tbody>
@@ -60,10 +60,10 @@
                 <td><input class="form-control" ng-model="bread.price" style="max-width: 50px;"></td>
                 <td><input class="form-control" ng-model="bread.stock" style="max-width: 50px;"></td>
 
-                <td><button class="button button-primary" id="addButton" ng-click="addBread()">Add</button></td>
-                <td><button class="button" id = "updateButton" ng-click="updateBread()">Update</button></td>
-                <td><button class="button button-delete" id="deleteButton" ng-click="deleteBread(bread._id)">Delete</button></td>
-                <td class="table-col-clear"><button class="button" id="cancelButton" ng-click="exitAddUpdateMode()">Cancel</button></td>
+                <td ng-show="btns.addBtn"><button class="button button-primary" id="addButton" ng-click="addBread()">Add</button></td>
+                <td ng-show="btns.updateBtn"><button class="button" id = "updateButton" ng-click="updateBread()">Update</button></td>
+                <td ng-show="btns.delBtn"><button class="button button-delete" id="deleteButton" ng-click="deleteBread(bread._id)">Delete</button></td>
+                <td ng-show="btns.cancelBtn" class="table-col-clear"><button class="button" id="cancelButton" ng-click="exitAddUpdateMode()">Cancel</button></td>
 
             </tr>
 

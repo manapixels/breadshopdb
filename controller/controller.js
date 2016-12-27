@@ -1,6 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate']);
-
-var inputbar, addButton, updateButton, deleteButton, clearButton;
+var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function($routeProvider) {
     $routeProvider
@@ -19,17 +17,14 @@ myApp.config(function($routeProvider) {
 
 myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
 
-    console.log("This is the controller");
+    $scope.btns = {
+        addBtn: true,
+        updateBtn: true,
+        delBtn: true,
+        clearBtn: true,
+        cancelBtn: true
+    };
     
-    $scope.$on('$routeChangeSuccess', function() {
-        inputbar        = document.getElementById("inputBar")
-        addButton       = document.getElementById("addButton").parentNode;
-        updateButton    = document.getElementById("updateButton").parentNode;
-        deleteButton    = document.getElementById("deleteButton").parentNode;
-        clearButton     = document.getElementById("clearButton").parentNode;
-        
-    });
-
     var refresh = function() {
         $http.get('/breadlist')
             .then(function successCallback(response) {
@@ -67,6 +62,8 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $http.get('/breadlist/' + id)
             .then(function successCallback(response) {
                 $scope.bread = response.data;
+                $scope.$applyAsync;
+                console.log("editing bread", response.data);
                 $scope.enterUpdateMode();
             });
     };
@@ -113,36 +110,46 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
     };
 
     $scope.enterAddMode = function(){
+
+        angular.element( document.querySelector( '#inputbar' ) ).addClass('show');
         
-        inputbar.classList.add('show');
-        
-        addButton.removeAttribute("style");
-        updateButton.style.display = 'none';
-        deleteButton.style.display = 'none';
-        clearButton.style.display = 'none';
+        $scope.btns = {
+            addBtn: true,
+            updateBtn: false,
+            delBtn: false,
+            clearBtn: true,
+            cancelBtn: true
+        };
         
     };
 
     $scope.enterUpdateMode = function(){
         
-        inputbar.classList.add('show');
+        angular.element( document.querySelector( '#inputbar' ) ).addClass('show');
         
-        addButton.style.display = 'none';
-        updateButton.removeAttribute("style");
-        deleteButton.removeAttribute("style");
-        clearButton.style.display = 'block';
+        $scope.btns = {
+            addBtn: false,
+            updateBtn: true,
+            delBtn: true,
+            clearBtn: true,
+            cancelBtn: true
+        };
         
     };
 
     $scope.exitAddUpdateMode = function(){
 
-        inputbar.classList.remove('show');
+        angular.element( document.querySelector( '#inputbar' ) ).removeClass('show');
         
         setTimeout(function(){
-            addButton.style.display = 'none';
-            updateButton.style.display = 'none';
-            deleteButton.style.display = 'none';
-            clearButton.style.display = 'none';
+            $scope.btns = {
+                addBtn: false,
+                updateBtn: false,
+                delBtn: false,
+                clearBtn: false,
+                cancelBtn: true
+            };
+            $scope.$apply();
         }, 300);
 
         $scope.clearInputs();

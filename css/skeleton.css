@@ -519,13 +519,6 @@ input {
 }
 
 
-
-.ng-enter         { animation: fadein 0.4s 0.2s both ease-out; position: absolute; left: 0; right: 0; }
-.ng-leave         { animation: fadeout 0.2s 0.4s both ease-out; position: absolute; left: 0; right: 0; }
-
-    
-
-
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
