@@ -28,9 +28,9 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
     var refresh = function() {
         $http.get('/breadlist')
             .then(function successCallback(response) {
-                console.log("Received GET response");
                 $scope.breadlist = response.data;
                 delete $scope.bread;
+                console.log("RETRIEVE DB: success", response.data);
             });
     };
 
@@ -41,9 +41,9 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         $scope.bread.stock = parseInt($scope.bread.stock);
         $http.post('/breadlist', $scope.bread)
             .then(function successCallback(response) {
-                console.log(response);
                 $scope.exitAddUpdateMode();
-            refresh();
+                refresh();
+                console.log("ADD RECORD: success", response);
             });
     };
 
@@ -51,9 +51,9 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         console.log(id);
         $http.delete('/breadlist/' + id)
             .then(function successCallback(response) {
-                console.log(response);
                 $scope.exitAddUpdateMode();
-            refresh();
+                refresh();
+                console.log("DELETE RECORD: success", response);
             });
     };
 
@@ -63,8 +63,8 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
             .then(function successCallback(response) {
                 $scope.bread = response.data;
                 $scope.$applyAsync;
-                console.log("editing bread", response.data);
                 $scope.enterUpdateMode();
+                console.log("RETRIEVE FOR EDITING: success", response.data);
             });
     };
 
@@ -72,9 +72,9 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
         console.log($scope.bread._id);
         $http.put('/breadlist/' + $scope.bread._id, $scope.bread)
             .then(function successCallback(response) {
-                console.log(response);
                 $scope.exitAddUpdateMode();
                 refresh();
+                console.log("UPDATE RECORD: success", response);
             });
     };
 
@@ -85,6 +85,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
                 $scope.bread = response.data;
                 $scope.bread.stock  = parseInt($scope.bread.stock) + 1;
                 $scope.updateBread(id);
+                console.log("ADD BREAD: success");
             });
 
     };
@@ -96,23 +97,20 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
                 $scope.bread = response.data;
                 $scope.bread.stock  = parseInt($scope.bread.stock) - 1;
                 $scope.updateBread(id);
+                console.log("MINUS BREAD: success");
             });
 
-    };
-    
-    $scope.clearInputs = function() {
-        delete $scope.bread;
     };
 
     $scope.sortBy = function(propertyName) {
         $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
         $scope.propertyName = propertyName;
+        console.log("SORTED", propertyName);
     };
 
     $scope.enterAddMode = function(){
 
         angular.element( document.querySelector( '#inputbar' ) ).addClass('show');
-        
         $scope.btns = {
             addBtn: true,
             updateBtn: false,
@@ -126,7 +124,6 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
     $scope.enterUpdateMode = function(){
         
         angular.element( document.querySelector( '#inputbar' ) ).addClass('show');
-        
         $scope.btns = {
             addBtn: false,
             updateBtn: true,
@@ -140,7 +137,6 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
     $scope.exitAddUpdateMode = function(){
 
         angular.element( document.querySelector( '#inputbar' ) ).removeClass('show');
-        
         setTimeout(function(){
             $scope.btns = {
                 addBtn: false,
@@ -152,8 +148,7 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
             $scope.$apply();
         }, 300);
 
-        $scope.clearInputs();
+        delete $scope.bread;
     };
 
 }]);
-

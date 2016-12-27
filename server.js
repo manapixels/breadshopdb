@@ -5,12 +5,13 @@ var db = mongojs('breadlist', ['breadlist']);
 var bodyParser = require('body-parser');
 var multer      = require('multer');
 var upload      = multer({ dest: __dirname + '/uploads' });
+var favicon = require('serve-favicon');
 
+app.use(favicon(__dirname + '/images/favicon.png'));
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.json());
 
 app.get('/breadlist', function(req, res) {
-    console.log("I received a GET request");
     
     db.breadlist.find(function(err, docs) {
         console.log(docs);

@@ -483,19 +483,49 @@ input {
     display: -webkit-flex;
     display: flex;
     
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     -webkit-align-items: stretch;
     align-items: stretch;
 }
 .flexchild {
-    flex: 1;   
+    flex: 0 1 25%;
+    border: 1px solid #000;
+    padding: 1.2em;
+    margin: 0.4em;
+    max-width: 100%;
+    
+    display: flex;
+    flex-direction: column;
 }
 .flexchild span {
     display: block;
 }
+.flexchild img {
+    max-width: 100%;
+}
+.flexchild .name,
+.flexchild .description,
+.flexchild .price {
+    flex: 1;
+}
+.flexchild .name {
+    font-family: 'Arima Madurai', cursive;
+    font-size: 1.1em;
+}
+.flexchild .description {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 0.9em;
+}
+.flexchild .price {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+}
+
+
+
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
