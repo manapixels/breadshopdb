@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngFileUpload']);
 
 myApp.config(function($routeProvider) {
     $routeProvider
@@ -15,7 +15,7 @@ myApp.config(function($routeProvider) {
         });
 });
 
-myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('AppController', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
 
     $scope.btns = {
         addBtn: true,
@@ -150,5 +150,30 @@ myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
 
         delete $scope.bread;
     };
+    
+    
+    $scope.upload = function (file, bread_id) {
+        Upload.upload({
+            url: '/uploads/' + bread_id,
+            data: {file: file},
+            method: 'POST'
+        }).then(function (resp) {
+            console.log('UPLOADED: ' + resp.data[0] + ' to ' + resp.data[1]);
+            $scope.reinitBreadlist();   
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+    
+    $scope.reinitBreadlist = function() {
+        var orig = $scope.breadlist;
+        $scope.breadlist = []; // triggers a $digest
+        $scope.breadlist = orig;
+    };
 
+    
+    
 }]);

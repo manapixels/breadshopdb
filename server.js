@@ -3,9 +3,12 @@ var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('breadlist', ['breadlist']);
 var bodyParser = require('body-parser');
-var multer      = require('multer');
-var upload      = multer({ dest: __dirname + '/uploads' });
 var favicon = require('serve-favicon');
+var fs = require('fs');
+var path = require('path');
+
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 app.use(favicon(__dirname + '/images/favicon.png'));
 app.use(express.static(__dirname + "/"));
@@ -53,21 +56,27 @@ app.put('/breadlist/:id', function(req, res) {
     });
 });
 
-app.post('/api/upload', upload.single('myFile'), function(req, res) {
-     var widgetId       = req.body.widgetId;
-     var width          = req.body.width;
-     var myFile         = req.file;
+//app.post('/uploads', function(req, res) {
+//    console.log(req.data.base64);
+//});
 
-     var originalname   = myFile.originalname;
-     var filename       = myFile.filename;
-     var path           = myFile.path;
-     var destination    = myFile.destination;
-     var size           = myFile.size;
-     var mimetype       = myFile.mimetype;
-    
-    res.send(myFile);
+app.post('/uploads/:id', multipartyMiddleware, function(req, res) {
     
     
+    var absolutePath = path.normalize(__dirname + "/uploads/" + path.basename(req.files.file.path));
+    var relativePath = "/uploads/" + path.basename(req.files.file.path);
+    
+    // copy image from temp directory to /uploads folder
+    fs.createReadStream(req.files.file.path).pipe(fs.createWriteStream(absolutePath));
+    
+    // save to database
+    var breadid = req.params.id;
+    db.breadlist.findAndModify({query: {_id: mongojs.ObjectId(breadid)},
+                                update: {$set: {imagePath: relativePath}},
+                                new: true}, function (err, docs) {
+        res.send([req.files.file.originalFilename, relativePath]);
+    });
+
 });
 
 app.listen(3000);

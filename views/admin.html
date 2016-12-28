@@ -26,11 +26,11 @@
             
             <tr ng-repeat="bread in breadlist | orderBy:propertyName:reverse">
                 <td>{{bread.id}}</td>
-                <td>
-                    <form action="/api/upload" method="post" enctype="multipart/form-data" onchange="this.submit();">
-                        <input name="myFile" type="file" id="file" class="inputfile" />
-                        <label for="file"><i class="fa fa-upload" aria-hidden="true"></i></label>
-                    </form>
+                <td ng-if="!bread.imagePath">
+                    <div class="button" ngf-select="upload($file, bread._id)" ><i class="fa fa-upload" style="font-size: 1.5em; color: rgb(30, 174, 219);" aria-hidden="true"></i></div>
+                </td>
+                <td ng-if="bread.imagePath">
+                    <div class="imgbutton" ngf-select="upload($file, bread._id)" ><img src="{{bread.imagePath}}" ng-if="bread.imagePath" class="thumbnail"/></div>
                 </td>
                 <td>{{bread.name}}</td>
                 <td>{{bread.description}}</td>

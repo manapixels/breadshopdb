@@ -166,6 +166,7 @@ a:hover {
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .button,
+.imgbutton,
 button,
 input[type="submit"],
 input[type="reset"],
@@ -245,7 +246,9 @@ input[type="button"].button-delete:focus {
   color: #FFF;
   background-color: #d74c71;
   border-color: #d74c71; }
-
+.imgbutton {
+  height: auto;
+}
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -546,6 +549,9 @@ input {
 }
 .needspace {
     padding-bottom: 5%;
+}
+.thumbnail {
+    max-width: 80px;
 }
 
 
